@@ -1,0 +1,13 @@
+body {background-color: black;}
+h1 {font-family: verdana;
+  color: white;}
+  a {font-family: verdana;
+  color:white;}
+  .links {
+    padding-left: 80px; padding-right: 80px; padding-top: 25PX; padding-bottom: 25PX;
+  }
+  .text-standard {
+    color: white;
+    font-size: 18px;
+    font-family: Courier new
+  }

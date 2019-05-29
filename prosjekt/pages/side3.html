@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="no" dir="ltr">
+  <head>
+    <link rel="icon" href="images/BMW-icon.ico">
+    <meta charset="utf-8">
+    <title>CHAT</title>
+    <link rel="stylesheet" href="../stil/stil.css">
+  </head>
+  <body>
+    <div class="" style="display:flex; flex-direction: row;">
+      <h1>CHATBOX</h1>
+        <img style="padding-left: 35px;" src="../bilder/header.jpg" alt="Im sorry, but this picture won't load, for some reason.." width="80%" height="100">
+    </div>
+    <div class="" style="display:flex; flex-direction: row; justify-content: center;">
+      <div class="links">
+        <a href="index.html">HOME</a>
+      </div>
+      <div class="links">
+        <a href="side2.html">INFO</a>
+      </div>
+      <div class="links">
+        <a href="side3.html">CHAT</a>
+      </div>
+      <div class="links">
+        <a href="side4.html">DATABASE</a>
+      </div>
+      <div class="links">
+        <a href="side5.html">VIDEO</a>
+      </div>
+    </div>
+    <b class="text-standard" style="padding-left: 566px;">
+           CHAT
+         </b>
+
+
+
+<section class="chat" style="padding-left: 566px;">
+  <form id="skjema">
+  <input type="text" id="inpAvsender" required placeholder="Hvem er du?">
+
+  <input type="text" id="inpMening" required placeholder="Hva sier du?">
+
+  <button type="submit" class="button">OK</button>
+
+  </form>
+
+  <article id="txtMeldinger" style="color: white;"></article>
+
+</section>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyD6-WDx0U0vk-RN2Dpk5khT5zM6vwKv4L0",
+    authDomain: "prosjekt3-a1813.firebaseapp.com",
+    databaseURL: "https://prosjekt3-a1813.firebaseio.com",
+    projectId: "prosjekt3-a1813",
+    storageBucket: "prosjekt3-a1813.appspot.com",
+    messagingSenderId: "655867453067",
+    appId: "1:655867453067:web:e4c6a6a32d3634c0"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script>
+
+let database = firebase.database();
+
+let meldinger = database.ref("meldinger");
+
+let skjema = document.getElementById("skjema");
+
+let inpAvsender = document.getElementById("inpAvsender");
+
+let inpMening = document.getElementById("inpMening");
+
+let txtMeldinger = document.getElementById("txtMeldinger");
+
+function visMelding(snapshot) {
+
+let melding = snapshot.val();
+
+let meldingTekst = `<p>
+
+<b>${melding.avsender}: </b>
+
+<i>${melding.tekst}</i>
+
+</p>`;
+
+txtMeldinger.innerHTML = txtMeldinger.innerHTML + meldingTekst;
+
+}
+
+function regNyMelding(evt) {
+
+evt.preventDefault();
+
+let nyMelding = {
+
+avsender: inpAvsender.value,
+
+tekst: inpMening.value
+
+};
+
+meldinger.push(nyMelding);
+
+inpMening.value = "";
+
+}
+
+meldinger.on("child_added", visMelding);
+
+skjema.onsubmit = regNyMelding;
+
+</script>
+  </body>
+</html>
